@@ -6,9 +6,17 @@
 #include <unistd.h>
 #include <string.h>
 
+#define BUF_SIZE 1024
 static int num_dirs, num_regular;
 
 bool is_dir(const char* path) {
+  //stat *buf = (char*)calloc(BUF_SIZE, sizeof(char));
+  int answer = stat(path, buf);
+  if(answer = 0){
+    if(S_ISDIR(buf.st_mode)){
+      return true;
+    }
+  }
   /*
    * Use the stat() function (try "man 2 stat") to determine if the file
    * referenced by path is a directory or not.  Call stat, and then use
@@ -16,15 +24,23 @@ bool is_dir(const char* path) {
    * return value from stat in case there is a problem, e.g., maybe the
    * the file doesn't actually exist.
    */
-}
+ }
 
-/* 
+/*
  * I needed this because the multiple recursion means there's no way to
  * order them so that the definitions all precede the cause.
  */
 void process_path(const char*);
 
 void process_directory(const char* path) {
+  dir = opendir(path)
+  while(readdir(dir)){
+    chdir(0)
+
+
+  }
+
+  //chdir give the home address to fred.
   /*
    * Update the number of directories seen, use opendir() to open the
    * directory, and then use readdir() to loop through the entries

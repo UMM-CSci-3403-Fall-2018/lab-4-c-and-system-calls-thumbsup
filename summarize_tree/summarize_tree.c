@@ -10,12 +10,17 @@
 static int num_dirs, num_regular;
 
 bool is_dir(const char* path) {
-  //stat *buf = (char*)calloc(BUF_SIZE, sizeof(char));
+  struct stat *buf = (struct stat*)calloc(BUF_SIZE, sizeof(struct stat));
   int answer = stat(path, buf);
-  if(answer = 0){
-    if(S_ISDIR(buf.st_mode)){
+  if(answer == 0){
+    if(S_ISDIR(buf->st_mode)){
       return true;
+    } else {
+      return false;
     }
+  } else {
+    // print and die
+    exit(1);
   }
   /*
    * Use the stat() function (try "man 2 stat") to determine if the file
@@ -33,14 +38,21 @@ bool is_dir(const char* path) {
 void process_path(const char*);
 
 void process_directory(const char* path) {
-  dir = opendir(path)
-  while(readdir(dir)){
-    chdir(0)
-
-
+  DIR *dir = opendir(path);
+  chdir(path);
+  num_dirs = num_dirs + 1;
+  while(struct dirent *entry = readdir(dir)){
+    // entry->d_name is the filename of this entry
+    if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..")!= 0) {
+      process_path(entry->d_name);
+    }
   }
+  chdir("..");
+
+  closedir(dir);
 
   //chdir give the home address to fred.
+  //increment counter
   /*
    * Update the number of directories seen, use opendir() to open the
    * directory, and then use readdir() to loop through the entries
@@ -55,12 +67,21 @@ void process_directory(const char* path) {
 }
 
 void process_file(const char* path) {
+  num_regular = num_regular + 1;
+
+  // while(files = readdir(path)){
+  //   num_regular = num_regular + 1;
+  //   process_path(files);
+  // }
+  // chdir("..");
+  // closedir()
   /*
    * Update the number of regular files.
    */
 }
 
 void process_path(const char* path) {
+  //printf("Processing path %s.\n", path);
   if (is_dir(path)) {
     process_directory(path);
   } else {

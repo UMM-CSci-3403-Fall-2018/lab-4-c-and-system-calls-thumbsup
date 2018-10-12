@@ -47,15 +47,36 @@ int main(int argc, char *argv[]) {
     FILE *inputFile;
     FILE *outputFile;
 
-    // if(argc = 1 ){
-    //   inputFile = stdin;
-    //   outputFile =stdout;
-    //   disemvowel(inputFile, outputFile);
+    if(argc == 1){
+      //takes 0
+      inputFile = stdin;
+      outputFile =stdout;
+
+    }
+    // int n;
+    // for(n = 0; n < argc; n++){
+    //   puts(argv[n]);
     // }
-      inputFile= fopen(argv[1], "r");
-      outputFile = fopen(argv[2], "w");
-      disemvowel(inputFile, outputFile);
+     if(argc == 3 ){
+       //takes 0, 1, 2
+       inputFile= fopen(argv[1], "r");
+       outputFile = fopen(argv[2], "w");
+
+     }
+
+     if(argc == 2){
+       //takes 0, 1
+        inputFile= fopen(argv[1], "r");
+        outputFile =stdout;
+     }
+
+     disemvowel(inputFile, outputFile);
+     //arg[0] takes everything. arg 1 and arg 2
 
 
     return 0;
 }
+
+
+//find find the name of files in this case, flag count the files or directories
+//wc count the number of files or directoly

@@ -1,11 +1,10 @@
 #!/bin/bash
 
 #$1 is agrument of directory
+directory=$1
+num_dirs=$(find $directory -type d | wc -l)
+num_regular=$(find $directory -type f | wc -l)
 
-num_dirs=$(find $1 -type d | wc -l)
-
-num_regular=$(find $1 -type f | wc -l)
-
-echo $num_dirs
-echo $num_files
+echo There were $num_dirs directories.
+echo There were $num_regular regular files.
 

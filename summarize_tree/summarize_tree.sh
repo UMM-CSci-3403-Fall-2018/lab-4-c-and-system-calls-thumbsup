@@ -1,8 +1,11 @@
 #!/bin/bash
 
-#$1 is argument that takes directory
-#type d find directories
-#type f find files
-find $1 -type d | wc -l |xargs
+#$1 is agrument of directory
 
-find $1 -type f | wc -l |xargs
+num_dirs=$(find $1 -type d | wc -l)
+
+num_regular=$(find $1 -type f | wc -l)
+
+echo $num_dirs
+echo $num_files
+
